@@ -23,6 +23,7 @@ plugins {
 
 stonecutter {
     create(rootProject) {
+        //@TODO add back modern versions once you have a lot of time
         versions("1.8.9", "26.2")
 
         vcsVersion = "26.2"
