@@ -172,10 +172,6 @@ tasks {
         inputs.properties(props)
 
         filesMatching("fabric.mod.json") { expand(props) }
-
-        val mixinJava = "JAVA_${requiredJava.majorVersion}"
-        inputs.property("java", mixinJava)
-        filesMatching("*.mixins.json") { expand("java" to mixinJava) }
     }
 
     jar {

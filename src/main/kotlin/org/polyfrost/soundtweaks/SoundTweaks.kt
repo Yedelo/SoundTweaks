@@ -2,12 +2,12 @@ package org.polyfrost.soundtweaks
 
 import net.fabricmc.api.ModInitializer
 import net.minecraft.client.Minecraft
-import net.minecraft.client.sounds.WeighedSoundEvents
+import net.minecraft.resources.Identifier
 import org.polyfrost.oneconfig.api.event.v1.EventManager
 import org.polyfrost.oneconfig.api.event.v1.events.ResourceFinishedLoading
 import org.polyfrost.soundtweaks.config.SoundTweaksConfig
 import org.polyfrost.soundtweaks.mixins.SoundManagerAccessor
-import net.minecraft.resources.Identifier
+import org.polyfrost.soundtweaks.mixins.SoundRegistryAccessor
 
 object SoundTweaks : ModInitializer {
     const val ID = "@MOD_ID@"
@@ -28,8 +28,13 @@ object SoundTweaks : ModInitializer {
     @JvmStatic
     var config: SoundTweaksConfig? = null
 
-    fun getSounds(): MutableMap<Identifier, WeighedSoundEvents> {
+    fun getSounds(): Map<Identifier, Any> {
         val soundManager = Minecraft.getInstance().soundManager
-        return (soundManager as? SoundManagerAccessor)?.registry ?: mutableMapOf()
+        val registry = (soundManager as? SoundManagerAccessor)?.registry ?: return mutableMapOf()
+        //? if 1.8.9 {
+        /*return (registry as SoundRegistryAccessor).sounds
+        *///?} else {
+        return registry
+        //?}
     }
 }
